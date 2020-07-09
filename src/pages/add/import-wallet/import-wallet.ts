@@ -84,8 +84,8 @@ export class ImportWalletPage {
     this.isIOS = this.platformProvider.isIOS;
     this.selectedTab = 'words';
     this.showAdvOpts = false;
-    this.availableCoins = this.currencyProvider.getAvailableChains();
-
+    // john
+    this.availableCoins = this.currencyProvider.getAvailableChains1();
     this.code = this.navParams.data.code;
     this.processedInfo = this.processWalletInfo(this.code);
 
@@ -384,6 +384,7 @@ export class ImportWalletPage {
     }
 
     // set opts.useLegacyCoinType
+
     if (
       coin == 'bch' &&
       this.derivationPathHelperProvider.parsePath(
@@ -534,6 +535,7 @@ export class ImportWalletPage {
       }
 
       // set opts.useLegacyCoinType
+      /*
       if (
         opts.coin == 'bch' &&
         this.derivationPathHelperProvider.parsePath(derivationPath).coinCode ==
@@ -542,7 +544,7 @@ export class ImportWalletPage {
         opts.useLegacyCoinType = true;
         this.logger.debug('Using 0 for BCH creation');
       }
-
+      */
       if (
         !opts.networkName ||
         !opts.derivationStrategy ||

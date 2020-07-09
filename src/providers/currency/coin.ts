@@ -321,5 +321,40 @@ export const availableCoins: CoinsMap<CoinOpts> = {
       backgroundColor: '#00dcfa',
       gradientBackgroundColor: '#00dcfa'
     }
-  }
+  },
+  vcl: {
+    name: 'Vircle',
+    chain: 'VCL',
+    coin: 'vcl',
+    unitInfo: {
+      unitName: 'VCL',
+      unitToSatoshi: 100000000,
+      unitDecimals: 8,
+      unitCode: 'vcl'
+    },
+    properties: {
+      hasMultiSig: true,
+      hasMultiSend: true,
+      isUtxo: true,
+      isERCToken: false,
+      isStableCoin: false,
+      singleAddress: false
+    },
+    paymentInfo: {
+      paymentCode: 'BIP73',
+      protocolPrefix: { livenet: 'bitcoincash', testnet: 'bchtest' },
+      ratesApi: 'https://bitpay.com/api/rates/bch',
+      blockExplorerUrls: 'bws.vircle.xyz:1443//#/VCL/'
+    },
+    feeInfo: {
+      feeUnit: 'sat/byte',
+      feeUnitAmount: 1000,
+      blockTime: 10,
+      maxMerchantFee: 'normal'
+    },
+    theme: {
+      backgroundColor: '#2fcf6e',
+      gradientBackgroundColor: '#2fcf6e'
+    }
+  },
 };

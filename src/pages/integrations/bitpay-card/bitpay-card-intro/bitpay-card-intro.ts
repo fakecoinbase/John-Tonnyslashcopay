@@ -105,7 +105,6 @@ export class BitPayCardIntroPage {
   }
 
   ionViewDidEnter() {
-    this.iabCardProvider.updateWalletStatus();
     this.bitPayCardProvider.logEvent('legacycard_view_setup', {});
   }
 

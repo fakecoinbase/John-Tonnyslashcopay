@@ -94,6 +94,11 @@ export class IncomingDataProvider {
     return !!this.bwcProvider.getBitcore().URI.isValid(data);
   }
 
+  private isValidVircleUri(data: string): boolean {
+    data = this.sanitizeUri(data);
+    return !!this.bwcProvider.getVircle().URI.isValid(data);
+  }
+
   private isValidBitcoinCashUri(data: string): boolean {
     data = this.sanitizeUri(data);
     return !!this.bwcProvider.getBitcoreCash().URI.isValid(data);
@@ -128,6 +133,13 @@ export class IncomingDataProvider {
     return !!(
       this.bwcProvider.getBitcore().Address.isValid(data, 'livenet') ||
       this.bwcProvider.getBitcore().Address.isValid(data, 'testnet')
+    );
+  }
+
+  private isValidVircleAddress(data: string): boolean {
+    return !!(
+        this.bwcProvider.getVircle().Address.isValid(data, 'livenet') ||
+        this.bwcProvider.getVircle().Address.isValid(data, 'testnet')
     );
   }
 
@@ -455,6 +467,21 @@ export class IncomingDataProvider {
     } else this.goSend(address, amount, message, coin);
   }
 
+  private handleVircleUri(data: string, redirParams?: RedirParams): void {
+    this.logger.debug('Incoming-data: Vircle URI');
+    let amountFromRedirParams =
+        redirParams && redirParams.amount ? redirParams.amount : '';
+    const coin = Coin.VCL;
+    let parsed = this.bwcProvider.getVircle().URI(data);
+    let address = parsed.address ? parsed.address.toString() : '';
+    let message = parsed.message;
+    let amount = parsed.amount || amountFromRedirParams;
+    if (parsed.r) {
+      const payProUrl = this.getPayProUrl(parsed.r);
+      this.goToPayPro(payProUrl, coin);
+    } else this.goSend(address, amount, message, coin);
+  }
+
   // Deprecated
   private handlePlainUrl(data: string): void {
     this.logger.debug('Incoming-data: Plain URL', data);
@@ -527,6 +554,25 @@ export class IncomingDataProvider {
       this.showMenu({
         data,
         type: 'rippleAddress',
+        coin
+      });
+    } else if (redirParams && redirParams.amount) {
+      this.goSend(data, redirParams.amount, '', coin);
+    } else {
+      this.goToAmountPage(data, coin);
+    }
+  }
+
+  private handlePlainVircleAddress(
+      data: string,
+      redirParams?: RedirParams
+  ): void {
+    this.logger.debug('Incoming-data: Vircle plain address');
+    const coin = Coin.VCL;
+    if (redirParams && redirParams.activePage === 'ScanPage') {
+      this.showMenu({
+        data,
+        type: 'vircleAddress',
         coin
       });
     } else if (redirParams && redirParams.amount) {
@@ -727,6 +773,11 @@ export class IncomingDataProvider {
       this.handleBitcoinCashUriLegacyAddress(data);
       return true;
 
+      // Vircle URI
+    }else if (this.isValidVircleUri(data)) {
+      this.handleVircleUri(data, redirParams);
+      return true;
+
       // Plain URL
     } else if (this.isValidPlainUrl(data)) {
       this.handlePlainUrl(data);
@@ -765,6 +816,11 @@ export class IncomingDataProvider {
       // Simplex
     } else if (this.isValidSimplexUri(data)) {
       this.goToSimplex(data);
+      return true;
+
+      // Plain Address (Vircle)
+    } else if (this.isValidVircleAddress(data)) {
+      this.handlePlainVircleAddress(data, redirParams);
       return true;
 
       // Invoice Intent
@@ -850,11 +906,6 @@ export class IncomingDataProvider {
 
         case 'debit-card-order':
           this.openIAB('debitCardOrder');
-          this.persistenceProvider.setCardExperimentFlag('enabled');
-          this.events.publish('experimentUpdateStart');
-          setTimeout(() => {
-            this.events.publish('experimentUpdateComplete');
-          }, 300);
       }
 
       return true;

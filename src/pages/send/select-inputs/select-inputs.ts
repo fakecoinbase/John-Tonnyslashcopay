@@ -72,7 +72,8 @@ export class SelectInputsPage {
   ) {
     this.bitcore = {
       btc: this.bwcProvider.getBitcore(),
-      bch: this.bwcProvider.getBitcoreCash()
+      bch: this.bwcProvider.getBitcoreCash(),
+      vcl: this.bwcProvider.getVircle()
     };
     this.wallet = this.navParams.data.wallet;
     this.events.subscribe(

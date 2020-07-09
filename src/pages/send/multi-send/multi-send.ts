@@ -74,7 +74,8 @@ export class MultiSendPage {
   ) {
     this.bitcore = {
       btc: this.bwcProvider.getBitcore(),
-      bch: this.bwcProvider.getBitcoreCash()
+      bch: this.bwcProvider.getBitcoreCash(),
+      vcl: this.bwcProvider.getVircle()
     };
     this.isDisabledContinue = true;
     this.wallet = this.navParams.data.wallet;

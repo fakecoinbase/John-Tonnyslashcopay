@@ -51,7 +51,8 @@ export class ExchangeRates {
     private logger: Logger,
     private events: Events
   ) {
-    const availableChains = this.currencyProvider.getAvailableChains();
+    // john
+    const availableChains = this.currencyProvider.getAvailableChains1();
     for (const coin of availableChains) {
       const {
         backgroundColor,

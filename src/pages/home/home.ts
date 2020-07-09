@@ -245,15 +245,15 @@ export class HomePage {
       this.cardExperimentEnabled && this.isCordova
         ? {
             name: 'bitpay-card',
-            title: this.translate.instant('Get the BitPay Card'),
+            title: this.translate.instant('Live on crypto'),
             body: this.translate.instant(
               'Designed for people who want to live life on crypto.'
             ),
             app: 'bitpay',
-            linkText: this.translate.instant('Order Now'),
+            linkText: this.translate.instant('Sign up'),
             link: BitPayCardIntroPage,
             dismissible: true,
-            imgSrc: 'assets/img/bitpay-card/bitpay-card-mc-angled-plain.svg'
+            imgSrc: 'assets/img/icon-bpcard.svg'
           }
         : {
             name: 'bitpay-card',

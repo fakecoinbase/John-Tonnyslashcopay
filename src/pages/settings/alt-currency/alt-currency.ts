@@ -54,6 +54,9 @@ export class AltCurrencyPage {
         isoCode: 'ETH'
       },
       {
+        isoCode: 'VCL'
+      },
+      {
         isoCode: 'XRP'
       },
       {

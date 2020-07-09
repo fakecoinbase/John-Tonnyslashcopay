@@ -51,9 +51,7 @@ export type InfoSheetType =
   | 'speed-up-tx'
   | 'speed-up-notice'
   | 'unconfirmed-inputs'
-  | 'rbf-tx'
-  | 'total-amount'
-  | 'subtotal-amount';
+  | 'rbf-tx';
 
 export type OptionsSheetType =
   | 'wallet-options'

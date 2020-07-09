@@ -5,18 +5,22 @@ export class DerivationPathHelperProvider {
   public defaultBTC: string;
   public defaultBCH: string;
   public defaultETH: string;
+  public defaultVCL: string;
   public defaultXRP: string;
   public defaultTestnet: string;
   public defaultMultisigBTC: string;
   public defaultMultisigBCH: string;
+  public defaultMultisigVCL: string;
 
   public constructor() {
     this.defaultBTC = "m/44'/0'/0'";
     this.defaultBCH = "m/44'/145'/0'";
     this.defaultETH = "m/44'/60'/0'";
+    this.defaultVCL = "m/44'/57'/0'";
     this.defaultXRP = "m/44'/144'/0'";
     this.defaultMultisigBTC = "m/48'/0'/0'";
     this.defaultMultisigBCH = "m/48'/145'/0'";
+    this.defaultMultisigVCL = "m/44'/57'/0'";
     this.defaultTestnet = "m/44'/1'/0'";
   }
 
@@ -67,6 +71,9 @@ export class DerivationPathHelperProvider {
       case "60'": // for ETH
         networkName = 'livenet';
         break;
+      case "57'": // for VCL
+        networkName = 'livenet';
+        break;
       case "144'": // for XRP
         networkName = 'livenet';
         break;
@@ -101,6 +108,9 @@ export class DerivationPathHelperProvider {
         break;
       case 'eth':
         isValid = ["60'", "0'", "1'"].indexOf(coinCode) > -1;
+        break;
+      case 'vcl':
+        isValid = ["57'", "0'", "1'"].indexOf(coinCode) > -1;
         break;
       case 'xrp':
         isValid = ["144'", "0'", "1'"].indexOf(coinCode) > -1;

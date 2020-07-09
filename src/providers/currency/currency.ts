@@ -11,7 +11,8 @@ export enum Coin {
   USDC = 'usdc',
   GUSD = 'gusd',
   PAX = 'pax',
-  BUSD = 'busd'
+  BUSD = 'busd',
+  VCL = 'vcl'
 }
 
 export type CoinsMap<T> = { [key in Coin]: T };
@@ -48,6 +49,11 @@ export class CurrencyProvider {
     return !!this.coinOpts[coin].properties.hasMultiSig;
   }
 
+  isVircleCoin(coin: Coin): boolean {
+    return this.coinOpts[coin].chain === 'VCL';
+  }
+
+
   isERCToken(coin: Coin): boolean {
     return !!this.coinOpts[coin].properties.isERCToken;
   }
@@ -65,12 +71,20 @@ export class CurrencyProvider {
     return this.availableCoins;
   }
 
+  getAvailableCoins1(): Coin[] {
+    return this.availableCoins.filter(coin => this.isVircleCoin(coin));
+  }
+
   getAvailableChains(): string[] {
     return _.uniq(
       _.map(Object.values(this.coinOpts), (opts: CoinOpts) =>
         opts.chain.toLowerCase()
       )
     );
+  }
+
+  getAvailableChains1(): string[] {
+    return this.availableCoins.filter(coin => this.isVircleCoin(coin));
   }
 
   getAvailableTokens(): Token[] {
@@ -80,6 +94,11 @@ export class CurrencyProvider {
   getMultiSigCoins(): Coin[] {
     return this.availableCoins.filter(coin => this.isSharedCoin(coin));
   }
+
+  getMultiSigCoins1(): Coin[] {
+    return this.availableCoins.filter(coin => this.isSharedCoin(coin) && this.isVircleCoin(coin));
+  }
+
 
   getCoinName(coin: Coin): string {
     return this.coinOpts[coin].name;
