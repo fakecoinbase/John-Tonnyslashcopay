@@ -45,15 +45,8 @@ export class SendPage {
   public hasWallets: boolean;
   public invalidAddress: boolean;
   private validDataTypeMap: string[] = [
-    'BitcoinAddress',
-    'BitcoinCashAddress',
-    'EthereumAddress',
-    'EthereumUri',
-    'RippleAddress',
-    'RippleUri',
-    'BitcoinUri',
-    'BitcoinCashUri',
-    'BitPayUri'
+    'VircleAddress',
+    'VircleUri',
   ];
   private pageMap = {
     AddressbookAddPage,
@@ -172,12 +165,7 @@ export class SendPage {
       this.invalidAddress = true;
       let network = isPayPro ? data.network : addrData.network;
 
-      if (this.wallet.coin === 'bch' && this.wallet.network === network) {
-        const isLegacy = this.checkIfLegacy();
-        isLegacy ? this.showLegacyAddrMessage() : this.showErrorMessage();
-      } else {
-        this.showErrorMessage();
-      }
+      this.showErrorMessage();
     }
 
     return false;

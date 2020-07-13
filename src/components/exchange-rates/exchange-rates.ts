@@ -31,6 +31,7 @@ export class ExchangeRates {
   public isoCode: string;
   public coins = [];
   public fiatCodes = [
+    'CNY',
     'USD',
     'INR',
     'GBP',
@@ -51,8 +52,7 @@ export class ExchangeRates {
     private logger: Logger,
     private events: Events
   ) {
-    // john
-    const availableChains = this.currencyProvider.getAvailableChains1();
+    const availableChains = this.currencyProvider.getAvailableChains();
     for (const coin of availableChains) {
       const {
         backgroundColor,
@@ -77,7 +77,7 @@ export class ExchangeRates {
   }
 
   public goToPricePage(card) {
-    this.navCtrl.push(PricePage, { card });
+    // this.navCtrl.push(PricePage, { card });
   }
 
   public getPrices(force: boolean = false) {
@@ -118,15 +118,15 @@ export class ExchangeRates {
   }
 
   private updateValues(i: number) {
-    this.coins[i].currentPrice = this.coins[i].historicalRates[0].rate;
+    this.coins[i].currentPrice = this.coins[i].historicalRates[0].data.fundValue;
     this.coins[i].averagePriceAmount =
       this.coins[i].currentPrice -
       this.coins[i].historicalRates[this.coins[i].historicalRates.length - 1]
-        .rate;
+        .data.fundValue;
     this.coins[i].averagePrice =
       (this.coins[i].averagePriceAmount * 100) /
       this.coins[i].historicalRates[this.coins[i].historicalRates.length - 1]
-        .rate;
+        .data.fundValue;
   }
 
   private setIsoCode() {
@@ -141,7 +141,7 @@ export class ExchangeRates {
       case 'xrp':
         return '1.4-4';
       default:
-        return '1.2-2';
+        return '1.4-4';
     }
   }
 }

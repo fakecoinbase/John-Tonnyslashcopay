@@ -14,7 +14,7 @@ describe('AmountPage', () => {
   let toFiatSpy;
 
   const wallet = {
-    coin: 'bch',
+    coin: 'vcl',
     cachedStatus: {
       totalBalanceStr: '1.000000',
       totalBalanceSat: 100000000,
@@ -56,7 +56,7 @@ describe('AmountPage', () => {
       instance.unitIndex = 1;
       instance.unitToSatoshi = 1e8;
       instance.sendMax();
-      expect(toFiatSpy).toHaveBeenCalledWith(100000000, 'USD', Coin.BCH);
+      expect(toFiatSpy).toHaveBeenCalledWith(100000000, 'USD', Coin.VCL);
       expect(instance.expression).toBe('1000000.00');
     });
 

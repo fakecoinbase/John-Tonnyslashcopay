@@ -114,7 +114,7 @@ describe('Provider: Wallet Provider', () => {
       const newOpts = {
         wallet: {
           settings: {
-            unitCode: 'btc',
+            unitCode: 'vcl',
             alternativeIsoCode: 'USD',
             unitToSatoshi: 100000000
           }
@@ -229,11 +229,11 @@ describe('Provider: Wallet Provider', () => {
         spendableAmount: 400000000,
         unitToSatoshi: 100000000,
         satToUnit: 1e-8,
-        totalBalanceStr: '5.00 BTC',
-        lockedBalanceStr: '1.00 BTC',
-        availableBalanceStr: '4.00 BTC',
-        spendableBalanceStr: '4.00 BTC',
-        pendingBalanceStr: '0.00 BTC',
+        totalBalanceStr: '5.00 VCL',
+        lockedBalanceStr: '1.00 VCL',
+        availableBalanceStr: '4.00 VCL',
+        spendableBalanceStr: '4.00 VCL',
+        pendingBalanceStr: '0.00 VCL',
         alternativeName: 'US Dollar',
         alternativeIsoCode: 'USD',
         totalBalanceAlternative: '1,000,000',
@@ -285,11 +285,11 @@ describe('Provider: Wallet Provider', () => {
         spendableAmount: 400000000,
         unitToSatoshi: 100000000,
         satToUnit: 1e-8,
-        totalBalanceStr: '5.00 BTC',
-        lockedBalanceStr: '1.00 BTC',
-        availableBalanceStr: '4.00 BTC',
-        spendableBalanceStr: '4.00 BTC',
-        pendingBalanceStr: '0.00 BTC',
+        totalBalanceStr: '5.00 VCL',
+        lockedBalanceStr: '1.00 VCL',
+        availableBalanceStr: '4.00 VCL',
+        spendableBalanceStr: '4.00 VCL',
+        pendingBalanceStr: '0.00 VCL',
         alternativeName: 'US Dollar',
         alternativeIsoCode: 'USD',
         totalBalanceAlternative: '1,000,000',
@@ -315,13 +315,13 @@ describe('Provider: Wallet Provider', () => {
   });
 
   describe('Function: getAddressView', () => {
-    it('should get the correct address with protocol format for BCH testnet', () => {
+    it('should get the correct address with protocol format for VCL testnet', () => {
       spyOn(txFormatProvider, 'toCashAddress').and.returnValue(
         'qqfs4tjymy5cs0j4lz78y2lvensl0l42wu80z5jass'
       );
 
       const address = walletProvider.getAddressView(
-        Coin.BCH,
+        Coin.VCL,
         'testnet',
         'qqfs4tjymy5cs0j4lz78y2lvensl0l42wu80z5jass'
       );
@@ -330,13 +330,13 @@ describe('Provider: Wallet Provider', () => {
       );
     });
 
-    it('should get the correct address with protocol format for BCH livenet', () => {
+    it('should get the correct address with protocol format for VCL livenet', () => {
       spyOn(txFormatProvider, 'toCashAddress').and.returnValue(
         'qz8ds306px5n65gffn8u69vvnksfw6huwyjczrvkh3'
       );
 
       const address = walletProvider.getAddressView(
-        Coin.BCH,
+        Coin.VCL,
         'livenet',
         'qz8ds306px5n65gffn8u69vvnksfw6huwyjczrvkh3'
       );
@@ -345,9 +345,9 @@ describe('Provider: Wallet Provider', () => {
       );
     });
 
-    it("should return the same address if it isn't BCH", () => {
+    it("should return the same address if it isn't VCL", () => {
       const address = walletProvider.getAddressView(
-        Coin.BTC,
+        Coin.VCL,
         'livenet',
         '3DTdZeycDBaimjuuknVGrG8fxdLbjsAjXN'
       );
@@ -682,7 +682,7 @@ describe('Provider: Wallet Provider', () => {
       const wallet: WalletMock = new WalletMock();
       const txp = {
         txid: 'txid1',
-        coin: 'btc',
+        coin: 'vcl',
         amount: 10000
       };
       const pass = 'password';
@@ -730,7 +730,7 @@ describe('Provider: Wallet Provider', () => {
       const txp = {
         txid: 'txid1',
         amount: 10000,
-        coin: 'btc',
+        coin: 'vcl',
         status: 'accepted'
       };
 
@@ -1007,7 +1007,7 @@ describe('Provider: Wallet Provider', () => {
       await keyProvider.load();
       txp = {
         txid: 'txid1',
-        coin: 'btc',
+        coin: 'vcl',
         status: 'pending'
       };
       spyOn(keyProvider, 'handleEncryptedWallet').and.returnValue(
@@ -1054,7 +1054,7 @@ describe('Provider: Wallet Provider', () => {
 
       txp = {
         txid: 'txid1',
-        coin: 'btc',
+        coin: 'vcl',
         status: 'accepted'
       };
       spyOn(keyProvider, 'handleEncryptedWallet').and.returnValue(
@@ -1114,7 +1114,7 @@ describe('Provider: Wallet Provider', () => {
         .getEncodedWalletInfo(wallet, pass)
         .then(walletInfo => {
           expect(walletInfo).toEqual(
-            "1|mom mom mom mom mom mom mom mom mom mom mom mom|livenet|m/44'/0'/0'|false|btc"
+            "1|mom mom mom mom mom mom mom mom mom mom mom mom|livenet|m/44'/0'/0'|false|vcl"
           );
         })
         .catch(err => {
@@ -1134,7 +1134,7 @@ describe('Provider: Wallet Provider', () => {
         .getEncodedWalletInfo(wallet, pass)
         .then(walletInfo => {
           expect(walletInfo).toEqual(
-            "2|xPrivKey2|livenet|m/44'/0'/0'|false|btc"
+            "2|xPrivKey2|livenet|m/44'/0'/0'|false|vcl"
           );
         })
         .catch(err => {
@@ -1231,22 +1231,22 @@ describe('Provider: Wallet Provider', () => {
   });
 
   describe('Function: getProtocolHandler', () => {
-    it('Should return bitcoincash if coin is bch and network is livenet', () => {
-      const coin = Coin.BCH;
+    it('Should return bitcoincash if coin is vcl and network is livenet', () => {
+      const coin = Coin.VCL;
       const network = 'livenet';
       const protocol = walletProvider.getProtocolHandler(coin, network);
       expect(protocol).toEqual('bitcoincash');
     });
 
-    it('Should return bchtest if coin is bch and network is testnet', () => {
-      const coin = Coin.BCH;
+    it('Should return bchtest if coin is vcl and network is testnet', () => {
+      const coin = Coin.VCL;
       const network = 'testnet';
       const protocol = walletProvider.getProtocolHandler(coin, network);
       expect(protocol).toEqual('bchtest');
     });
 
-    it('Should return bitcoin if coin is btc', () => {
-      const coin = Coin.BTC;
+    it('Should return bitcoin if coin is vcl', () => {
+      const coin = Coin.VCL;
       const protocol = walletProvider.getProtocolHandler(coin);
       expect(protocol).toEqual('bitcoin');
     });

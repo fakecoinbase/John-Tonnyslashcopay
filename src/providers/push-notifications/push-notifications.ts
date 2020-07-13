@@ -12,7 +12,6 @@ import { ConfigProvider } from '../config/config';
 import { PlatformProvider } from '../platform/platform';
 import { ProfileProvider } from '../profile/profile';
 
-import BWC from 'bitcore-wallet-client';
 import * as _ from 'lodash';
 
 @Injectable()
@@ -237,7 +236,7 @@ export class PushNotificationsProvider {
     const pubKey = this.appProvider.info.marketingPublicKey;
     if (!pubKey) return false;
 
-    const b = BWC.Bitcore;
+    const b = this.bwcProvider.getVircle();
     const ECDSA = b.crypto.ECDSA;
     const Hash = b.crypto.Hash;
     const SEP = '::';

@@ -11,8 +11,9 @@ export class RateProvider {
   private rates = {} as CoinsMap<{}>;
   private ratesAvailable = {} as CoinsMap<boolean>;
   private rateServiceUrl = {} as CoinsMap<string>;
+  private headers;
 
-  private fiatRateAPIUrl = 'https://bws.bitpay.com/bws/api/v1/fiatrates';
+  private fiatRateAPIUrl = 'http://47.105.77.95:8081/fundValue/latest';
 
   constructor(
     private currencyProvider: CurrencyProvider,
@@ -20,6 +21,7 @@ export class RateProvider {
     private logger: Logger
   ) {
     this.logger.debug('RateProvider initialized');
+    this.headers = {"Auth": '9c7f69dcb2c24532da39bca5a290ff47'}
     this.alternatives = {};
     for (const coin of this.currencyProvider.getAvailableCoins()) {
       this.rateServiceUrl[coin] = env.ratesAPI[coin];
@@ -33,13 +35,10 @@ export class RateProvider {
     return new Promise((resolve, reject) => {
       this.getCoin(chain)
         .then(dataCoin => {
-          _.each(dataCoin, currency => {
-            if (currency && currency.code && currency.rate) {
-              this.rates[chain][currency.code] = currency.rate;
-              if (currency.name)
-                this.alternatives[currency.code] = { name: currency.name };
-            }
-          });
+          if( dataCoin.data && dataCoin.data.fundValue){
+            this.rates[chain]['CNY'] = dataCoin.data.fundValue;
+            this.alternatives['CNY'] = { name: 'CNY' };
+          };
           this.ratesAvailable[chain] = true;
           resolve();
         })
@@ -52,7 +51,7 @@ export class RateProvider {
 
   public getCoin(chain: string): Promise<any> {
     return new Promise(resolve => {
-      this.http.get(this.rateServiceUrl[chain]).subscribe(data => {
+      this.http.get(this.rateServiceUrl[chain], {headers: this.headers} ).subscribe(data => {
         resolve(data);
       });
     });
@@ -157,8 +156,8 @@ export class RateProvider {
   ): Promise<any> {
     return new Promise(resolve => {
       const url =
-        this.fiatRateAPIUrl + '/' + currency + '?coin=' + coin + '&ts=' + ts;
-      this.http.get(url).subscribe(data => {
+        this.fiatRateAPIUrl;
+      this.http.get(url, {headers: this.headers}).subscribe(data => {
         resolve(data);
       });
     });

@@ -225,7 +225,7 @@ export class CopayApp {
 
     if (this.platform.is('cordova')) {
       this.statusBar.show();
-
+      /*
       try {
         const { country } = await this.http
           .get<{ country: string }>('https://bitpay.com/wallet-card/location')
@@ -236,7 +236,7 @@ export class CopayApp {
       } catch (err) {
         this.logger.log(err);
       }
-
+      */
       // Set User-Agent
       this.userAgent.set(
         this.appProvider.info.name +
@@ -589,12 +589,9 @@ export class CopayApp {
   }
 
   private processUrl(pathData): void {
-    if (pathData.indexOf('bitcoincash:/') != -1) {
-      this.logger.debug('Bitcoin Cash URL found');
-      this.handleOpenUrl(pathData.substring(pathData.indexOf('bitcoincash:/')));
-    } else if (pathData.indexOf('bitcoin:/') != -1) {
-      this.logger.debug('Bitcoin URL found');
-      this.handleOpenUrl(pathData.substring(pathData.indexOf('bitcoin:/')));
+    if (pathData.indexOf('vcl:/') != -1) {
+      this.logger.debug('Vircle URL found');
+      this.handleOpenUrl(pathData.substring(pathData.indexOf('vcl:/')));
     } else if (pathData.indexOf(this.appProvider.info.name + '://') != -1) {
       this.logger.debug(this.appProvider.info.name + ' URL found');
       this.handleOpenUrl(

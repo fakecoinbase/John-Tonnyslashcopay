@@ -129,6 +129,8 @@ export class PersistenceProvider {
   getProfile(): Promise<any> {
     return new Promise(resolve => {
       this.storage.get(Keys.PROFILE).then(profile => {
+        // john
+        // profile = undefined;
         resolve(profile);
       });
     });

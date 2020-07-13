@@ -33,6 +33,10 @@ export interface Config {
     url: string;
   };
 
+  ratio: {
+    url: string;
+  };
+
   download: {
     bitpay: {
       url: string;
@@ -151,12 +155,12 @@ export class ConfigProvider {
         reconnectDelay: 5000,
         idleDurationMin: 4,
         settings: {
-          unitName: 'BTC',
+          unitName: 'VCL',
           unitToSatoshi: 100000000,
           unitDecimals: 8,
-          unitCode: 'btc',
-          alternativeName: 'US Dollar',
-          alternativeIsoCode: 'USD',
+          unitCode: 'vcl',
+          alternativeName: 'Chinese Yuan',
+          alternativeIsoCode: 'CNY',
           defaultLanguage: '',
           feeLevel: 'normal'
         }
@@ -164,8 +168,11 @@ export class ConfigProvider {
 
       // Bitcore wallet service URL
       bws: {
-        url: 'https://bws.vircle.xyz/bws/api'
-        // url: 'https://bws.bitpay.com/bws/api'
+        url: 'https://bws.vircle.xyz/bws/api',
+      },
+
+      ratio: {
+        url: 'http://47.105.77.95:8081'
       },
 
       download: {

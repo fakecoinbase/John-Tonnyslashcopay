@@ -551,7 +551,6 @@ export class WalletProvider {
   }
 
   public getAddressView(coin: Coin, network: string, address: string): string {
-    if (coin != 'bch') return address;
     const protoAddr = this.getProtoAddress(coin, network, address);
     return protoAddr;
   }
@@ -1347,7 +1346,7 @@ export class WalletProvider {
     const prefs = {
       email: config.emailNotifications.email,
       language: this.languageProvider.getCurrent(),
-      unit: 'btc' // deprecated
+      unit: 'vcl' // deprecated
     };
 
     let updates = [];
@@ -1812,7 +1811,7 @@ export class WalletProvider {
   public copyCopayers(wallet: any, newWallet: any): Promise<any> {
     return new Promise((resolve, reject) => {
       let walletPrivKey = this.bwcProvider
-        .getBitcore()
+        .getVircle()
         .PrivateKey.fromString(wallet.credentials.walletPrivKey);
       let copayer = 1;
       let i = 0;

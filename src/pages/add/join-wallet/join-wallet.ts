@@ -167,10 +167,7 @@ export class JoinWalletPage {
         walletData = this.bwcProvider.parseSecret(invitation);
         this.coin = walletData.coin;
         this.derivationPathForTestnet = this.derivationPathHelperProvider.defaultTestnet;
-        this.derivationPathByDefault =
-          this.coin == 'bch'
-            ? this.derivationPathHelperProvider.defaultBCH
-            : this.derivationPathHelperProvider.defaultBTC;
+        this.derivationPathByDefault = this.derivationPathHelperProvider.defaultVCL;
 
         this.setDerivationPath(walletData.network);
 
@@ -224,15 +221,6 @@ export class JoinWalletPage {
       }
 
       // set opts.useLegacyCoinType
-      if (
-        this.coin == 'bch' &&
-        this.derivationPathHelperProvider.parsePath(derivationPath).coinCode ==
-          "0'"
-      ) {
-        opts.useLegacyCoinType = true;
-        this.logger.debug('Using 0 for BCH creation');
-      }
-
       if (
         !opts.networkName ||
         !opts.derivationStrategy ||

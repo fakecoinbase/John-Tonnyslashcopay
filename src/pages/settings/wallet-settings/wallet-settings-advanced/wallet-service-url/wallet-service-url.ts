@@ -80,7 +80,7 @@ export class WalletServiceUrlPage {
     switch (this.walletServiceForm.value.bwsurl) {
       case 'prod':
       case 'production':
-        bws = 'https://bws.bitpay.com/bws/api';
+        bws = 'https://bws.vircle.xyz/bws/api';
         break;
       case 'sta':
       case 'staging':

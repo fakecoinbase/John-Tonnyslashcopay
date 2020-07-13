@@ -12,11 +12,11 @@ export class BwcProvider {
     this.logger.debug('BwcProvider initialized');
   }
   public getBitcore() {
-    return BWC.Bitcore;
+    return BWC.Vircle;
   }
 
   public getBitcoreCash() {
-    return BWC.BitcoreCash;
+    return BWC.Vircle;
   }
 
   public getVircle() {
@@ -60,7 +60,7 @@ export class BwcProvider {
 
     // note opts use `bwsurl` all lowercase;
     let bwc = new BWC({
-      baseUrl: opts.bwsurl || 'https://bws.bitpay.com/bws/api',
+      baseUrl: opts.bwsurl || 'https://bws.vircle.xyz/bws/api',
       verbose: opts.verbose,
       timeout: 100000,
       transports: ['polling'],

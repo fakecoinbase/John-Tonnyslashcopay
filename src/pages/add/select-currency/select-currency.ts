@@ -67,10 +67,9 @@ export class SelectCurrencyPage {
     private errorsProvider: ErrorsProvider,
     private events: Events
   ) {
-    // john
     this.availableChains = this.navParam.data.isShared
-      ? this.currencyProvider.getMultiSigCoins1()
-      : this.currencyProvider.getAvailableChains1();
+      ? this.currencyProvider.getMultiSigCoins()
+      : this.currencyProvider.getAvailableChains();
     this.availableTokens = []; // this.currencyProvider.getAvailableTokens();
     for (const chain of this.availableChains) {
       this.coinsSelected[chain] = true;

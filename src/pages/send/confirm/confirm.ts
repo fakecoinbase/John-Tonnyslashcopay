@@ -49,7 +49,6 @@ import {
 export class ConfirmPage {
   @ViewChild('slideButton')
   slideButton;
-  protected bitcoreCash;
 
   public countDown = null;
   public CONFIRM_LIMIT_USD: number;
@@ -133,7 +132,6 @@ export class ConfirmPage {
     this.wallet = this.profileProvider.getWallet(this.navParams.data.walletId);
     this.fromWalletDetails = this.navParams.data.fromWalletDetails;
     this.fromCoinbase = this.navParams.data.fromCoinbase;
-    this.bitcoreCash = this.bwcProvider.getBitcoreCash();
     this.CONFIRM_LIMIT_USD = 20;
     this.FEE_TOO_HIGH_LIMIT_PER = 15;
     this.config = this.configProvider.get();
@@ -253,12 +251,6 @@ export class ConfirmPage {
       this.tx.feeLevel = 'custom';
     } else {
       this.tx.feeLevel = this.feeProvider.getCoinCurrentFeeLevel(this.tx.coin);
-    }
-
-    if (this.tx.coin && this.tx.coin == 'bch' && !this.fromMultiSend) {
-      this.tx.toAddress = this.bitcoreCash
-        .Address(this.tx.toAddress)
-        .toString(true);
     }
 
     this.getAmountDetails();
@@ -849,18 +841,6 @@ export class ConfirmPage {
       if (this.fromMultiSend) {
         txp.outputs = [];
         this.navParams.data.recipients.forEach(recipient => {
-          if (tx.coin && tx.coin == 'bch') {
-            recipient.toAddress = this.bitcoreCash
-              .Address(recipient.toAddress)
-              .toString(true);
-
-            recipient.addressToShow = this.walletProvider.getAddressView(
-              tx.coin,
-              tx.network,
-              recipient.toAddress
-            );
-          }
-
           txp.outputs.push({
             toAddress: recipient.toAddress,
             amount: recipient.amount,

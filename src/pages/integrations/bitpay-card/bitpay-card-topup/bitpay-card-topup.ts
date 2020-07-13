@@ -373,13 +373,6 @@ export class BitPayCardTopUpPage {
 
           txp['origToAddress'] = txp.toAddress;
 
-          if (wallet.coin && wallet.coin == 'bch') {
-            txp.toAddress = this.bitcoreCash
-              .Address(txp.toAddress)
-              .toString(true);
-            txp.outputs[0].toAddress = txp.toAddress;
-          }
-
           return this.walletProvider
             .getAddress(this.wallet, false)
             .then(address => {

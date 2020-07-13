@@ -84,8 +84,7 @@ export class ImportWalletPage {
     this.isIOS = this.platformProvider.isIOS;
     this.selectedTab = 'words';
     this.showAdvOpts = false;
-    // john
-    this.availableCoins = this.currencyProvider.getAvailableChains1();
+    this.availableCoins = this.currencyProvider.getAvailableChains();
     this.code = this.navParams.data.code;
     this.processedInfo = this.processWalletInfo(this.code);
 
@@ -102,8 +101,8 @@ export class ImportWalletPage {
       file: [null],
       filePassword: [null],
       derivationPathEnabled: [false],
-      coin: ['btc'],
-      derivationPath: [this.derivationPathHelperProvider.defaultBTC],
+      coin: ['vcl'],
+      derivationPath: [this.derivationPathHelperProvider.defaultVCL],
       bwsURL: [this.defaults.bws.url],
       isMultisig: [false]
     });
@@ -384,17 +383,6 @@ export class ImportWalletPage {
     }
 
     // set opts.useLegacyCoinType
-
-    if (
-      coin == 'bch' &&
-      this.derivationPathHelperProvider.parsePath(
-        this.importForm.value.derivationPath
-      ).coinCode == "0'"
-    ) {
-      opts.useLegacyCoinType = true;
-      this.logger.debug('Using 0 for BCH creation');
-    }
-
     if (
       !opts.networkName ||
       !opts.derivationStrategy ||

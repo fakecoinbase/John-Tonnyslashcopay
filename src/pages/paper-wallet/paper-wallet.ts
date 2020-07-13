@@ -70,7 +70,7 @@ export class PaperWalletPage {
     private bwcErrorProvider: BwcErrorProvider,
     private currencyProvider: CurrencyProvider
   ) {
-    this.bitcore = this.bwcProvider.getBitcore();
+    this.bitcore = this.bwcProvider.getVircle();
     this.isCordova = this.platformProvider.isCordova;
     this.isOpenSelector = false;
     this.scannedKey = this.navParams.data.privateKey;

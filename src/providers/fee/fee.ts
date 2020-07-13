@@ -105,7 +105,7 @@ export class FeeProvider {
 
   public getFeeLevels(coin: string): Promise<any> {
     return new Promise((resolve, reject) => {
-      coin = coin || 'btc';
+      coin = coin || 'vcl';
 
       if (
         this.cache.coin == coin &&
@@ -148,7 +148,7 @@ export class FeeProvider {
 
   public getSpeedUpTxFee(network: string, txSize: number): Promise<number> {
     // Only for BTC
-    return this.getFeeRate('btc', network, 'urgent').then(urgentFee => {
+    return this.getFeeRate('vcl', network, 'urgent').then(urgentFee => {
       // 250 bytes approx. is the minimum size of a tx with 1 input and 1 output
       const averageTxSize = 250;
       const fee = (urgentFee / 1000) * (txSize + averageTxSize);

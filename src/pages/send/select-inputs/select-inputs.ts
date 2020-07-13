@@ -44,12 +44,8 @@ export class SelectInputsPage {
 
   private selectedInputs = [];
   private validDataTypeMap: string[] = [
-    'BitcoinAddress',
-    'BitcoinCashAddress',
-    'EthereumAddress',
-    'EthereumUri',
-    'BitcoinUri',
-    'BitcoinCashUri'
+    'VircleAddress',
+    'VircleUri'
   ];
   constructor(
     private navCtrl: NavController,
@@ -71,8 +67,6 @@ export class SelectInputsPage {
     private configProvider: ConfigProvider
   ) {
     this.bitcore = {
-      btc: this.bwcProvider.getBitcore(),
-      bch: this.bwcProvider.getBitcoreCash(),
       vcl: this.bwcProvider.getVircle()
     };
     this.wallet = this.navParams.data.wallet;

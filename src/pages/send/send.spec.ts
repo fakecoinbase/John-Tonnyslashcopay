@@ -14,7 +14,7 @@ describe('SendPage', () => {
   let instance;
 
   const wallet = {
-    coin: 'bch',
+    coin: 'vcl',
     network: 'testnet',
     status: {
       totalBalanceStr: '1.000000'
@@ -45,7 +45,7 @@ describe('SendPage', () => {
         );
         instance.ionViewWillEnter();
 
-        expect(profileProviderSpy).toHaveBeenCalledWith({ coin: 'bch' });
+        expect(profileProviderSpy).toHaveBeenCalledWith({ coin: 'vcl' });
       });
     });
     describe('ionViewWillLeave', () => {
@@ -155,7 +155,7 @@ describe('SendPage', () => {
 
       it('should handle paypro bch livenet and call error modal', fakeAsync(() => {
         instance.wallet = {
-          coin: 'bch',
+          coin: 'vcl',
           network: 'testnet',
           status: {
             totalBalanceStr: '1.000000'
@@ -169,8 +169,8 @@ describe('SendPage', () => {
           payProUrl: 'https://bitpay.com/i/3dZDvRXdxpkL4FoWtkB6ZZ',
           paymentOptions: [
             {
-              chain: 'BCH',
-              currency: 'BCH',
+              chain: 'VCL',
+              currency: 'VCL',
               decimals: 8,
               estimatedAmount: 10800,
               minerFee: 100,
@@ -195,7 +195,7 @@ describe('SendPage', () => {
 
       it('should handle paypro bch testnet and call error modal', fakeAsync(() => {
         instance.wallet = {
-          coin: 'bch',
+          coin: 'vcl',
           network: 'livenet',
           status: {
             totalBalanceStr: '1.000000'
@@ -209,8 +209,8 @@ describe('SendPage', () => {
           payProUrl: 'https://test.bitpay.com/i/JTfRobeRFmiCjBivDnzV1Q',
           paymentOptions: [
             {
-              chain: 'BCH',
-              currency: 'BCH',
+              chain: 'VCL',
+              currency: 'VCL',
               decimals: 8,
               estimatedAmount: 10800,
               minerFee: 100,
@@ -359,7 +359,7 @@ describe('SendPage', () => {
 
       it('should handle paypro bch livenet and call error modal', fakeAsync(() => {
         instance.wallet = {
-          coin: 'bch',
+          coin: 'vcl',
           network: 'testnet',
           status: {
             totalBalanceStr: '1.000000'
@@ -373,8 +373,8 @@ describe('SendPage', () => {
           payProUrl: 'https://bitpay.com/i/3dZDvRXdxpkL4FoWtkB6ZZ',
           paymentOptions: [
             {
-              chain: 'BCH',
-              currency: 'BCH',
+              chain: 'VCL',
+              currency: 'VCL',
               decimals: 8,
               estimatedAmount: 10800,
               minerFee: 100,
@@ -398,7 +398,7 @@ describe('SendPage', () => {
 
       it('should handle paypro bch testnet and call error modal', fakeAsync(() => {
         instance.wallet = {
-          coin: 'bch',
+          coin: 'vcl',
           network: 'livenet',
           status: {
             totalBalanceStr: '1.000000'
@@ -412,8 +412,8 @@ describe('SendPage', () => {
           payProUrl: 'https://test.bitpay.com/i/JTfRobeRFmiCjBivDnzV1Q',
           paymentOptions: [
             {
-              chain: 'BCH',
-              currency: 'BCH',
+              chain: 'VCL',
+              currency: 'VCL',
               decimals: 8,
               estimatedAmount: 10800,
               minerFee: 100,
@@ -479,10 +479,10 @@ describe('SendPage', () => {
 
     describe('for wallets bch livenet', () => {
       beforeEach(() => {
-        instance.wallet.coin = 'bch';
+        instance.wallet.coin = 'vcl';
         instance.wallet.network = 'livenet';
         instance.navParams.data.amount = 11111111;
-        instance.navParams.data.coin = 'bch';
+        instance.navParams.data.coin = 'vcl';
 
         const checkIfContact = Promise.resolve(false);
         spyOn(instance, 'checkIfContact').and.returnValue(checkIfContact);
@@ -498,7 +498,7 @@ describe('SendPage', () => {
           {
             activePage: 'SendPage',
             amount: 11111111,
-            coin: 'bch'
+            coin: 'vcl'
           }
         );
       });
@@ -512,8 +512,8 @@ describe('SendPage', () => {
           payProUrl: 'https://bitpay.com/i/3dZDvRXdxpkL4FoWtkB6ZZ',
           paymentOptions: [
             {
-              chain: 'BCH',
-              currency: 'BCH',
+              chain: 'VCL',
+              currency: 'VCL',
               decimals: 8,
               estimatedAmount: 10800,
               minerFee: 100,
@@ -537,7 +537,7 @@ describe('SendPage', () => {
         expect(instance.invalidAddress).toBeFalsy();
         expect(redirSpy).toHaveBeenCalledWith(
           'https://bitpay.com/i/3dZDvRXdxpkL4FoWtkB6ZZ',
-          'bch',
+          'vcl',
           undefined,
           true
         );
@@ -616,8 +616,8 @@ describe('SendPage', () => {
           payProUrl: 'https://test.bitpay.com/i/JTfRobeRFmiCjBivDnzV1Q',
           paymentOptions: [
             {
-              chain: 'BCH',
-              currency: 'BCH',
+              chain: 'VCL',
+              currency: 'VCL',
               decimals: 8,
               estimatedAmount: 10800,
               minerFee: 100,
@@ -681,12 +681,12 @@ describe('SendPage', () => {
       }));
     });
 
-    describe('for wallets bch testnet', () => {
+    describe('for wallets vcl testnet', () => {
       beforeEach(() => {
-        instance.wallet.coin = 'bch';
+        instance.wallet.coin = 'vcl';
         instance.wallet.network = 'testnet';
         instance.navParams.data.amount = 11111111;
-        instance.navParams.data.coin = 'bch';
+        instance.navParams.data.coin = 'vcl';
 
         const checkIfContact = Promise.resolve(false);
         spyOn(instance, 'checkIfContact').and.returnValue(checkIfContact);
@@ -702,7 +702,7 @@ describe('SendPage', () => {
           {
             activePage: 'SendPage',
             amount: 11111111,
-            coin: 'bch'
+            coin: 'vcl'
           }
         );
       });
@@ -716,8 +716,8 @@ describe('SendPage', () => {
           payProUrl: 'https://bitpay.com/i/3dZDvRXdxpkL4FoWtkB6ZZ',
           paymentOptions: [
             {
-              chain: 'BCH',
-              currency: 'BCH',
+              chain: 'VCL',
+              currency: 'VCL',
               decimals: 8,
               estimatedAmount: 10800,
               minerFee: 100,
@@ -741,7 +741,7 @@ describe('SendPage', () => {
         expect(instance.invalidAddress).toBeFalsy();
         expect(redirSpy).toHaveBeenCalledWith(
           'https://bitpay.com/i/3dZDvRXdxpkL4FoWtkB6ZZ',
-          'bch',
+          'vcl',
           undefined,
           true
         );
@@ -864,8 +864,8 @@ describe('SendPage', () => {
           payProUrl: 'https://bitpay.com/i/3dZDvRXdxpkL4FoWtkB6ZZ',
           paymentOptions: [
             {
-              chain: 'BCH',
-              currency: 'BCH',
+              chain: 'VCL',
+              currency: 'VCL',
               decimals: 8,
               estimatedAmount: 10800,
               minerFee: 100,

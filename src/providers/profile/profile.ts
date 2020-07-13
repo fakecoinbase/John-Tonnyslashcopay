@@ -483,10 +483,10 @@ export class ProfileProvider {
 
       const chain = this.currencyProvider.getChain(wallet.coin).toLowerCase();
       if (
-        (wallet.n == 1 && wallet.credentials.addressType == 'P2PKH') ||
-        (wallet.credentials.addressType == 'P2WPKH' &&
+          wallet.n == 1 &&
+          wallet.credentials.addressType == 'P2PKH' &&
           derivationStrategy == 'BIP44' &&
-          (chain == 'btc' || (chain == 'bch' && coinCode == "145'")))
+          (chain == 'vcl' && coinCode == "57'")
       ) {
         return true;
       }
@@ -494,23 +494,7 @@ export class ProfileProvider {
         (wallet.n > 1 && wallet.credentials.addressType == 'P2SH') ||
         (wallet.credentials.addressType == 'P2WSH' &&
           derivationStrategy == 'BIP48' &&
-          (chain == 'btc' || (chain == 'bch' && coinCode == "145'")))
-      ) {
-        return true;
-      }
-      if (
-        wallet.n == 1 &&
-        wallet.credentials.addressType == 'P2PKH' &&
-        derivationStrategy == 'BIP44' &&
-        (chain == 'eth' && coinCode == "60'")
-      ) {
-        return true;
-      }
-      if (
-        wallet.n == 1 &&
-        wallet.credentials.addressType == 'P2PKH' &&
-        derivationStrategy == 'BIP44' &&
-        (chain == 'xrp' && coinCode == "144'")
+          (chain == 'vcl' && coinCode == "57'"))
       ) {
         return true;
       }
@@ -1500,7 +1484,7 @@ export class ProfileProvider {
                   const prefs = {
                     email: config.emailNotifications.email,
                     language: this.languageProvider.getCurrent(),
-                    unit: 'btc' // deprecated
+                    unit: 'vcl' // deprecated
                   };
 
                   data.walletClient.preferences = _.assign(

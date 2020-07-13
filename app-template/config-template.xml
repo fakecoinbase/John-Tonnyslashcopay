@@ -12,6 +12,7 @@
         BitPay Inc.
     </author>
     <content src="index.html" />
+    <access origin="http://47.105.77.95:8081" />
     <access origin="https://bws.vircle.xyz" />
     <access origin="https://bws.bitpay.com" />
     <access origin="https://bitpay.com" />

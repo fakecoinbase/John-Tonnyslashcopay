@@ -889,7 +889,7 @@ msgid "Each bitcoin wallet can generate billions of addresses from your 12-word 
 msgstr "每个比特币钱包可以从您的 12 字备份生成亿万个地址。一个新的地址是自动生成和显示每个时间你收到付款。"
 
 msgid "Each copayer has their own recovery phrase. To recover funds stored in a Shared Wallet you will need the recovery phrase from each copayer."
-msgstr ""每个联署人都有自己的助记词。要恢复存储在共享钱包中的资金，你需要从每个联署人那里获得助记词。
+msgstr "每个联署人都有自己的助记词。要恢复存储在共享钱包中的资金，你需要从每个联署人那里获得助记词。"
 
 msgid "Easily deposit and withdraw funds."
 msgstr "轻松存取资金。"

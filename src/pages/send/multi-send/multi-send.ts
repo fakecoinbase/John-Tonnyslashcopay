@@ -73,8 +73,6 @@ export class MultiSendPage {
     private errorsProvider: ErrorsProvider
   ) {
     this.bitcore = {
-      btc: this.bwcProvider.getBitcore(),
-      bch: this.bwcProvider.getBitcoreCash(),
       vcl: this.bwcProvider.getVircle()
     };
     this.isDisabledContinue = true;
